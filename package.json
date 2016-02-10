@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/daichuqi/altec.git"
+    "url": "git+https://github.com/daichuqi/simpleblog.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/daichuqi/altec/issues"
+    "url": "https://github.com/daichuqi/simpleblog/issues"
   },
-  "homepage": "https://github.com/daichuqi/altec#readme",
+  "homepage": "https://github.com/daichuqi/simpleblog#readme",
   "dependencies": {
     "babel": "^6.3.26",
     "react": "^0.14.6",
