@@ -1,18 +1,17 @@
-import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
+import React, {Component} from 'react'
+import ReactDOM from 'react-dom'
 import {Route, Router, browserHistory } from 'react-router'
-
 import Layout from './components/layout'
 import Add from './components/add'
 import Blogs from './components/blogs'
 
-
 // import SearchBar from './components/search_bar';
 // import VideoList from './components/video_list'
 // import VideoDetail from './components/video_detail'
-import _ from 'lodash';
+import _ from 'lodash'
 
-const mountNode = document.querySelector('.container')
+const mountNode = document.querySelector('.container');
+
 class App extends Component{
   constructor(props){
     super(props);
@@ -24,7 +23,7 @@ class App extends Component{
           <Route path="add" component={Add} />
           <Route path="blogs" component={Blogs} />
         </Route>
-    </Router>
+      </Router>
     );
   }
 }
