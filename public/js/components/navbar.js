@@ -1,18 +1,39 @@
 import React from 'react'
 import { Link } from 'react-router'
+import { Navbar,Nav,NavDropdown,MenuItem,NavItem } from 'react-bootstrap';
 
-class Navbar extends React.Component {
+
+
+class TobNavbar extends React.Component {
   constructor(props) {
     super(props)
   }
   render() {
     return (
-      <div>
-        <Link to="/add">Add</Link>
-        <Link to="/blogs">Blogs</Link>
-      </div>
+      <Navbar>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <Link to="/">SimpleBlog</Link>
+          </Navbar.Brand>
+        </Navbar.Header>
+
+        <Navbar.Collapse>
+          <Nav>
+            <li eventKey={1}><Link to="/add">Add</Link></li>
+            <li eventKey={2}><Link to="/blogs">Bolgs</Link></li>
+            <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
+              <li eventKey={3.1}><Link to="/add">Add</Link></li>
+              <li eventKey={3.2}><Link to="/blogs">Blogs</Link></li>
+            </NavDropdown>
+          </Nav>
+          <Nav pullRight>
+            <NavItem eventKey={1} href="#">Link Right</NavItem>
+            <NavItem eventKey={2} href="#">Link Right</NavItem>
+          </Nav>
+        </Navbar.Collapse>
+     </Navbar>
     )
   }
 }
 
-export default Navbar
+export default TobNavbar

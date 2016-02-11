@@ -1,11 +1,11 @@
 import React from 'react'
-import Navbar from './navbar'
+import TobNavbar from './navbar'
 
 export default class Layout extends React.Component {
   render() {
     return (
       <div>
-        <Navbar />
+        <TobNavbar />
         <div>
           {this.props.children}
         </div>

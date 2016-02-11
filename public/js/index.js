@@ -10,7 +10,7 @@ import Blogs from './components/blogs'
 // import VideoDetail from './components/video_detail'
 import _ from 'lodash'
 
-const mountNode = document.querySelector('.container');
+const mountNode = document.querySelector('.box');
 
 class App extends Component{
   constructor(props){
