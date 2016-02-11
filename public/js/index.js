@@ -22,6 +22,7 @@ class App extends Component{
         <Route path="/" component={Layout}>
           <Route path="add" component={Add} />
           <Route path="blogs" component={Blogs} />
+          <Route path="*" component={Blogs} />
         </Route>
       </Router>
     );

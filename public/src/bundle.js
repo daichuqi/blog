@@ -114,7 +114,8 @@
 	          _reactRouter.Route,
 	          { path: '/', component: _layout2.default },
 	          _react2.default.createElement(_reactRouter.Route, { path: 'add', component: _add2.default }),
-	          _react2.default.createElement(_reactRouter.Route, { path: 'blogs', component: _blogs2.default })
+	          _react2.default.createElement(_reactRouter.Route, { path: 'blogs', component: _blogs2.default }),
+	          _react2.default.createElement(_reactRouter.Route, { path: '*', component: _blogs2.default })
 	        )
 	      );
 	    }

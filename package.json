@@ -20,11 +20,13 @@
   "dependencies": {
     "babel": "^6.3.26",
     "express": "^4.13.4",
+    "express-urlrewrite": "^1.2.0",
     "lodash": "^4.3.0",
     "react": "^0.14.6",
     "react-bootstrap": "^0.28.3",
     "react-dom": "^0.14.6",
-    "react-router": "^2.0.0"
+    "react-router": "^2.0.0",
+    "webpack-dev-middleware": "^1.5.1"
   },
   "devDependencies": {
     "babel-core": "^6.4.5",
