@@ -77,7 +77,7 @@
 
 	var _blogs2 = _interopRequireDefault(_blogs);
 
-	var _lodash = __webpack_require__(465);
+	var _lodash = __webpack_require__(467);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -42041,6 +42041,87 @@
 
 	'use strict';
 
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _blog_data = __webpack_require__(465);
+
+	var _blog_list = __webpack_require__(466);
+
+	var _blog_list2 = _interopRequireDefault(_blog_list);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Blogs = function (_Component) {
+	  _inherits(Blogs, _Component);
+
+	  function Blogs(props) {
+	    _classCallCheck(this, Blogs);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Blogs).call(this, props));
+
+	    _this.state = {
+	      blogs: _blog_data.blogs
+	    };
+	    return _this;
+	  }
+
+	  _createClass(Blogs, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(_blog_list2.default, { blogs: this.state.blogs })
+	      );
+	    }
+	  }]);
+
+	  return Blogs;
+	}(_react.Component);
+
+	exports.default = Blogs;
+
+/***/ },
+/* 465 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var blogs = exports.blogs = [{
+	  title: "First",
+	  text: "hello world",
+	  time: "02/11/2016",
+	  _id: 1
+	}, {
+	  title: "Second",
+	  text: "hello nicole",
+	  time: "02/12/2016",
+	  _id: 2
+	}];
+
+/***/ },
+/* 466 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
@@ -42051,21 +42132,27 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Blogs = _react2.default.createClass({
-	  displayName: 'Blogs',
-	  render: function render() {
+	var BlogList = function BlogList(props) {
+	  var blogItems = props.blogs.map(function (blog) {
 	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      'Blogs'
+	      "div",
+	      { key: blog._id },
+	      " ",
+	      blog.title,
+	      " "
 	    );
-	  }
-	});
+	  });
+	  return _react2.default.createElement(
+	    "ul",
+	    { className: "col-md-4 list-group" },
+	    blogItems
+	  );
+	};
 
-	exports.default = Blogs;
+	exports.default = BlogList;
 
 /***/ },
-/* 465 */
+/* 467 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/**
@@ -56800,10 +56887,10 @@
 	  }
 	}.call(this));
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(466)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(468)(module), (function() { return this; }())))
 
 /***/ },
-/* 466 */
+/* 468 */
 /***/ function(module, exports) {
 
 	module.exports = function(module) {

@@ -1,11 +1,22 @@
-import React from 'react'
+import React,{Component} from 'react'
+import {blogs} from './blog_data'
+import BlogList from './blog_list'
 
-const Blogs = React.createClass({
+
+class Blogs extends Component{
+  constructor(props) {
+    super(props)
+    this.state = {
+      blogs:blogs
+    };
+  }
   render() {
     return (
-      <div>Blogs</div>
+      <div>
+        <BlogList blogs={this.state.blogs}/>
+      </div>
     )
   }
-})
+}
 
 export default Blogs
