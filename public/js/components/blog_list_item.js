@@ -1,16 +1,14 @@
 import React from 'react';
 
-const VideoListItem = ({video,onVideoSelect}) => {
-  // const video = props.video;
+const BlogListItem = (props) => {
+  const blog = props.blog;
   return (
-    <li onClick={()=> onVideoSelect(video)} className = "list-group-item">
-      <div className = "video-list media">
-        <div className="media-body">
-          <div className="media-heading">{video.snippet.title}</div>
-        </div>
-      </div>
+    <li className="blog_item">
+      <div className="blog_title">{blog.title}</div>
+      <div>{blog.time}</div>
+      <div>{blog.text}</div>
     </li>
   )
 }
 
-export default VideoListItem;
+export default BlogListItem;

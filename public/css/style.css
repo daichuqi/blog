@@ -1,0 +1,26 @@
+ul
+{
+  list-style-type: none;
+}
+
+textarea {
+   resize: none;
+}
+
+.blog_item{
+  margin:20px 50px 50px 20px;
+}
+.blog_title{
+  font-weight: bold;
+}
+
+
+.titleInputBox{
+  margin-bottom: 20px;
+}
+
+.textInputBox{
+  margin-bottom: 20px;
+  border-style: solid;
+  border-color: rgb(217, 217, 217);
+}

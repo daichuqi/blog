@@ -1,9 +1,10 @@
 import React from 'react';
+import BlogListItem from './blog_list_item';
 
 const BlogList = (props) => {
   const blogItems = props.blogs.map((blog)=>{
     return (
-      <div key={blog._id}> {blog.title} </div>
+      <BlogListItem key={blog._id} blog={blog}></BlogListItem>
     )
   });
   return(

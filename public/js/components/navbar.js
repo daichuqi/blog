@@ -2,8 +2,6 @@ import React from 'react'
 import { Link } from 'react-router'
 import { Navbar,Nav,NavDropdown,MenuItem,NavItem } from 'react-bootstrap';
 
-
-
 class TobNavbar extends React.Component {
   constructor(props) {
     super(props)

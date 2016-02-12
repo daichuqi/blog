@@ -1,6 +1,7 @@
 import React,{Component} from 'react'
 import {blogs} from './blog_data'
 import BlogList from './blog_list'
+import {getJSON} from '../utils/AppUtils'
 
 
 class Blogs extends Component{
@@ -10,9 +11,12 @@ class Blogs extends Component{
       blogs:blogs
     };
   }
+  componentDidMount(){
+
+  }
   render() {
     return (
-      <div>
+      <div className="container">
         <BlogList blogs={this.state.blogs}/>
       </div>
     )
