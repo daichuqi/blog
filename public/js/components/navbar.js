@@ -1,8 +1,8 @@
-import React from 'react'
+import React,{Component} from 'react'
 import { Link } from 'react-router'
 import { Navbar,Nav,NavDropdown,MenuItem,NavItem } from 'react-bootstrap';
 
-class TobNavbar extends React.Component {
+class TobNavbar extends Component {
   constructor(props) {
     super(props)
   }

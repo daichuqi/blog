@@ -1,20 +1,20 @@
-import {FETCH_BLOGS,CLEAR_BLOGS,ADD_BLOG,DELETE_BLOG,UPDATE_BLOG} from '../actions/index'
-
+import Constants from '../actions/constants'
+const ActionType = Constants.ActionTypes;
 
 export default function(state=[],action){
   switch(action.type){
-    case FETCH_BLOGS:
+    case ActionType.FETCH_BLOGS:
       // return state.concat([action.payload.data]);
       return [].concat.apply([], [action.payload.data,...state])
-    case CLEAR_BLOGS:
+    case ActionType.CLEAR_BLOGS:
       return []
-    case ADD_BLOG:
+    case ActionType.ADD_BLOG:
       return [action.payload,...state]
-    case DELETE_BLOG:
+    case ActionType.DELETE_BLOG:
       return [...state].filter(function (blog) {
         return blog._id !== action.payload.id;
       });
-    case UPDATE_BLOG:
+    case ActionType.UPDATE_BLOG:
       return [...state].map(function(blog,i){
         if(blog._id === action.payload.id){
           blog.title = action.payload.title

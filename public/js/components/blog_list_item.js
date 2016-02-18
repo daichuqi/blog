@@ -1,21 +1,16 @@
 import React,{Component} from 'react';
 import { Link } from 'react-router'
-
-
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {selectBlog} from '../actions/index'
-
-var parseTime = function(date){
-  return new Date(Number(date)).toString().slice(0,15);
-}
+import {parseTimeMs} from '../utils/AppUtils'
 
 class BlogListItem extends Component {
   constructor(props){
     super(props);
     this.state = {
       blog:this.props.blog,
-      date:parseTime(this.props.blog.date),
+      date:parseTimeMs(this.props.blog.date),
       section: {__html:this.props.blog.text.split("\n").join('<br />')}
     }
   }

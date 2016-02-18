@@ -1,25 +1,17 @@
 import axios from 'axios';
-
-export const FETCH_BLOGS = 'FETCH_BLOGS';
-export const FETCH_ONE_BLOG = 'FETCH_ONE_BLOG';
-export const CLEAR_BLOG = 'CLEAR_BLOG';
-export const CLEAR_BLOGS = 'CLEAR_BLOGS';
-export const ADD_BLOG = 'ADD_BLOG';
-export const DELETE_BLOG = 'DELETE_BLOG';
-export const SELECT_BLOG = 'SELECT_BLOG';
-export const UPDATE_BLOG = 'UPDATE_BLOG';
-
+import Constants from './constants'
+const ActionType = Constants.ActionTypes;
 
 export function updateBlog(blog){
   return{
-    type:UPDATE_BLOG,
+    type:ActionType.UPDATE_BLOG,
     payload:blog
   }
 }
 
 export function selectBlog(blog){
   return{
-    type:SELECT_BLOG,
+    type:ActionType.SELECT_BLOG,
     payload:blog
   }
 }
@@ -27,14 +19,14 @@ export function selectBlog(blog){
 export function fetchBlogs(){
   const data = axios.post('/getAllBlogs')
   return{
-    type:FETCH_BLOGS,
+    type:ActionType.FETCH_BLOGS,
     payload:data,
   };
 }
 
 export function addBlog(blog){
   return{
-    type:ADD_BLOG,
+    type:ActionType.ADD_BLOG,
     payload:blog,
   };
 }
@@ -44,26 +36,26 @@ export function fetchOneBlog(id){
     id:id
   });
   return{
-    type:FETCH_ONE_BLOG,
+    type:ActionType.FETCH_ONE_BLOG,
     payload:data,
   };
 }
 
 export function clearBlog(){
     return{
-    type:CLEAR_BLOG,
+    type:ActionType.CLEAR_BLOG,
   };
 }
 
 export function clearBlogs(){
     return{
-    type:CLEAR_BLOGS,
+    type:ActionType.CLEAR_BLOGS,
   };
 }
 
 export function deleteBlog(id){
   return{
-    type:DELETE_BLOG,
+    type:ActionType.DELETE_BLOG,
     payload:id,
   };
 }

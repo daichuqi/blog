@@ -1,8 +1,6 @@
 import React,{Component} from 'react'
 import TobNavbar from './navbar'
 import Blogs from '../containers/blogs'
-
-
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {fetchBlogs} from '../actions/index'
