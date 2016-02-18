@@ -34,7 +34,6 @@ server.post('/getAllBlogs', function(req,res,next){
   });
 })
 
-
 server.post('/getOneBlog', function(req,res,next){
   BlogDB.findById(req.body.id, function (err, blog) {
     if(blog){

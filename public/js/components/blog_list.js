@@ -23,7 +23,7 @@ const BlogList = ({blogs}) => {
     )
   });
   return(
-    <ul className="col-md-4 list-group">
+    <ul className="col-lg-8 col-md-10 list-group">
       {blogItems}
     </ul>
   );

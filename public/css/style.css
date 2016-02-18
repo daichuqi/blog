@@ -18,7 +18,6 @@ textarea {
 
 .blog_item{
   margin:20px 50px 50px 20px;
-  width: 600px;
 }
 .blog_title{
   font-weight: bold;
@@ -30,12 +29,17 @@ textarea {
     color: #902400;
 }
 
+.deleteBlogButton{
+  margin-left: 20px;
+}
+
 
 .titleInputBox{
   margin-bottom: 20px;
 }
 
 .textInputBox{
+  font-size: 9px;
   margin-bottom: 20px;
   border-style: solid;
   border-color: rgb(217, 217, 217);

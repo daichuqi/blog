@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 import {Route, Router, browserHistory } from 'react-router'
 import Layout from './components/layout'
+import Notfound from './components/notfound'
 
 import Add from './containers/add'
 import Blogs from './containers/blogs'
@@ -27,7 +28,7 @@ class App extends Component{
         <Route path="/" component={Layout}>
           <Route path="add" component={Add}  />
           <Route path="edit/:_id" component={Edit} />
-          <Route path="*" component={Blogs} />
+          <Route path="*" component={Notfound} />
         </Route>
       </Router>
     );

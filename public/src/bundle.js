@@ -69,7 +69,11 @@
 
 	var _layout2 = _interopRequireDefault(_layout);
 
-	var _add = __webpack_require__(502);
+	var _notfound = __webpack_require__(502);
+
+	var _notfound2 = _interopRequireDefault(_notfound);
+
+	var _add = __webpack_require__(503);
 
 	var _add2 = _interopRequireDefault(_add);
 
@@ -77,11 +81,11 @@
 
 	var _blogs2 = _interopRequireDefault(_blogs);
 
-	var _edit = __webpack_require__(505);
+	var _edit = __webpack_require__(506);
 
 	var _edit2 = _interopRequireDefault(_edit);
 
-	var _lodash = __webpack_require__(506);
+	var _lodash = __webpack_require__(507);
 
 	var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -89,11 +93,11 @@
 
 	var _redux = __webpack_require__(472);
 
-	var _reduxPromise = __webpack_require__(508);
+	var _reduxPromise = __webpack_require__(509);
 
 	var _reduxPromise2 = _interopRequireDefault(_reduxPromise);
 
-	var _reducers = __webpack_require__(515);
+	var _reducers = __webpack_require__(516);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -128,7 +132,7 @@
 	          { path: '/', component: _layout2.default },
 	          _react2.default.createElement(_reactRouter.Route, { path: 'add', component: _add2.default }),
 	          _react2.default.createElement(_reactRouter.Route, { path: 'edit/:_id', component: _edit2.default }),
-	          _react2.default.createElement(_reactRouter.Route, { path: '*', component: _blogs2.default })
+	          _react2.default.createElement(_reactRouter.Route, { path: '*', component: _notfound2.default })
 	        )
 	      );
 	    }
@@ -42136,7 +42140,7 @@
 	  });
 	  return _react2.default.createElement(
 	    'ul',
-	    { className: 'col-md-4 list-group' },
+	    { className: 'col-lg-8 col-md-10 list-group' },
 	    blogItems
 	  );
 	};
@@ -44761,11 +44765,60 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Notfound = function (_Component) {
+	  _inherits(Notfound, _Component);
+
+	  function Notfound() {
+	    _classCallCheck(this, Notfound);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Notfound).apply(this, arguments));
+	  }
+
+	  _createClass(Notfound, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        '404'
+	      );
+	    }
+	  }]);
+
+	  return Notfound;
+	}(_react.Component);
+
+	exports.default = Notfound;
+
+/***/ },
+/* 503 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
 	var _reactBootstrap = __webpack_require__(219);
 
 	var _reactDom = __webpack_require__(159);
 
-	var _AppUtils = __webpack_require__(503);
+	var _AppUtils = __webpack_require__(504);
 
 	var _reactRouter = __webpack_require__(160);
 
@@ -44823,7 +44876,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'titleInputBox' },
-	          _react2.default.createElement('input', { size: '61', max: '60', type: 'text', ref: 'title' })
+	          _react2.default.createElement('input', { size: '61', max: '60', type: 'text', ref: 'title', placeholder: '请输入标题...' })
 	        ),
 	        _react2.default.createElement('textarea', { ref: 'text', className: 'textInputBox', rows: '12', cols: '90' }),
 	        _react2.default.createElement(
@@ -44849,7 +44902,7 @@
 	exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(Add);
 
 /***/ },
-/* 503 */
+/* 504 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -44859,7 +44912,7 @@
 	});
 	exports.simplePost = exports.postJSON = undefined;
 
-	var _whatwgFetch = __webpack_require__(504);
+	var _whatwgFetch = __webpack_require__(505);
 
 	var _whatwgFetch2 = _interopRequireDefault(_whatwgFetch);
 
@@ -44906,7 +44959,7 @@
 	};
 
 /***/ },
-/* 504 */
+/* 505 */
 /***/ function(module, exports) {
 
 	(function(self) {
@@ -45301,7 +45354,7 @@
 
 
 /***/ },
-/* 505 */
+/* 506 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -45326,7 +45379,7 @@
 
 	var _reactBootstrap = __webpack_require__(219);
 
-	var _AppUtils = __webpack_require__(503);
+	var _AppUtils = __webpack_require__(504);
 
 	var _reactRouter = __webpack_require__(160);
 
@@ -45416,12 +45469,12 @@
 	          null,
 	          _react2.default.createElement(
 	            _reactBootstrap.Button,
-	            { onClick: this.handleUpdate, bsStyle: 'primary' },
+	            { className: 'updateBlogButton', onClick: this.handleUpdate, bsStyle: 'primary' },
 	            'UPDATE'
 	          ),
 	          _react2.default.createElement(
 	            _reactBootstrap.Button,
-	            { onClick: this.handleDelete, bsStyle: 'primary' },
+	            { className: 'deleteBlogButton', onClick: this.handleDelete, bsStyle: 'danger' },
 	            'DELETE'
 	          )
 	        )
@@ -45443,7 +45496,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Edit);
 
 /***/ },
-/* 506 */
+/* 507 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/**
@@ -60345,10 +60398,10 @@
 	  }
 	}.call(this));
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(507)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(508)(module), (function() { return this; }())))
 
 /***/ },
-/* 507 */
+/* 508 */
 /***/ function(module, exports) {
 
 	module.exports = function(module) {
@@ -60364,7 +60417,7 @@
 
 
 /***/ },
-/* 508 */
+/* 509 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60375,7 +60428,7 @@
 
 	exports['default'] = promiseMiddleware;
 
-	var _fluxStandardAction = __webpack_require__(509);
+	var _fluxStandardAction = __webpack_require__(510);
 
 	function isPromise(val) {
 	  return val && typeof val.then === 'function';
@@ -60402,7 +60455,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 509 */
+/* 510 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -60413,7 +60466,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _lodashIsplainobject = __webpack_require__(510);
+	var _lodashIsplainobject = __webpack_require__(511);
 
 	var _lodashIsplainobject2 = _interopRequireDefault(_lodashIsplainobject);
 
@@ -60432,7 +60485,7 @@
 	}
 
 /***/ },
-/* 510 */
+/* 511 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -60443,9 +60496,9 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var baseFor = __webpack_require__(511),
-	    isArguments = __webpack_require__(512),
-	    keysIn = __webpack_require__(513);
+	var baseFor = __webpack_require__(512),
+	    isArguments = __webpack_require__(513),
+	    keysIn = __webpack_require__(514);
 
 	/** `Object#toString` result references. */
 	var objectTag = '[object Object]';
@@ -60541,7 +60594,7 @@
 
 
 /***/ },
-/* 511 */
+/* 512 */
 /***/ function(module, exports) {
 
 	/**
@@ -60595,7 +60648,7 @@
 
 
 /***/ },
-/* 512 */
+/* 513 */
 /***/ function(module, exports) {
 
 	/**
@@ -60845,7 +60898,7 @@
 
 
 /***/ },
-/* 513 */
+/* 514 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -60856,8 +60909,8 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var isArguments = __webpack_require__(512),
-	    isArray = __webpack_require__(514);
+	var isArguments = __webpack_require__(513),
+	    isArray = __webpack_require__(515);
 
 	/** Used to detect unsigned integer values. */
 	var reIsUint = /^\d+$/;
@@ -60983,7 +61036,7 @@
 
 
 /***/ },
-/* 514 */
+/* 515 */
 /***/ function(module, exports) {
 
 	/**
@@ -61169,7 +61222,7 @@
 
 
 /***/ },
-/* 515 */
+/* 516 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -61180,11 +61233,11 @@
 
 	var _redux = __webpack_require__(472);
 
-	var _reducer_blogs = __webpack_require__(516);
+	var _reducer_blogs = __webpack_require__(517);
 
 	var _reducer_blogs2 = _interopRequireDefault(_reducer_blogs);
 
-	var _reducer_one_blog = __webpack_require__(517);
+	var _reducer_one_blog = __webpack_require__(518);
 
 	var _reducer_one_blog2 = _interopRequireDefault(_reducer_one_blog);
 
@@ -61198,7 +61251,7 @@
 	exports.default = rootReducer;
 
 /***/ },
-/* 516 */
+/* 517 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -61241,7 +61294,7 @@
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 /***/ },
-/* 517 */
+/* 518 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

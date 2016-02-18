@@ -33,9 +33,9 @@ class Add extends Component {
     return (
       <div className="container">
         <div className="titleInputBox">
-          <input size="61" max="60" type="text" ref="title" />
+          <input size="61" max="60" type="text" ref="title" placeholder="请输入标题..."/>
         </div>
-        <textarea ref="text" className="textInputBox" rows="12" cols="90"></textarea>
+        <textarea ref="text" className="textInputBox" rows="12" cols="90" ></textarea>
         <div><Button onClick={this.handlePost} bsStyle="primary">POST</Button></div>
       </div>
       )

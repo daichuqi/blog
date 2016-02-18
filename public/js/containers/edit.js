@@ -62,8 +62,8 @@ class Edit extends Component {
           value={this.state.text}>
         </textarea>
         <div>
-          <Button onClick={this.handleUpdate} bsStyle="primary">UPDATE</Button>
-          <Button onClick={this.handleDelete} bsStyle="primary">DELETE</Button>
+          <Button className="updateBlogButton" onClick={this.handleUpdate} bsStyle="primary">UPDATE</Button>
+          <Button className="deleteBlogButton" onClick={this.handleDelete} bsStyle="danger">DELETE</Button>
         </div>
       </div>
     )
