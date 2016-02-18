@@ -1,8 +1,13 @@
 import React,{Component} from 'react'
 import {Button} from 'react-bootstrap'
 import {findDOMNode} from 'react-dom'
-import {postJSON} from '../utils/AppUtils'
-import { browserHistory } from 'react-router'
+import {simplePost} from '../utils/AppUtils'
+import {browserHistory} from 'react-router'
+
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {clearBlogs} from '../actions/index'
+
 
 class Add extends Component {
   constructor(props){
@@ -16,8 +21,12 @@ class Add extends Component {
       date:new Date
     }
     if(blog.title && blog.text){
-      postJSON('/postblog', blog);
-      browserHistory.push('/blogs');
+      this.props.clearBlogs();
+      simplePost('/postBlog', blog).then((response) => {
+        browserHistory.push('/');
+      }).catch((err) => {
+        console.log('postblog failed: ', err);
+      });
     }
   }
   render(){
@@ -33,4 +42,8 @@ class Add extends Component {
   }
 }
 
-export default Add
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({clearBlogs},dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(Add);

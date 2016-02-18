@@ -12,16 +12,14 @@ function compare(a,b) {
 }
 
 const BlogList = ({blogs}) => {
-  let reactId = 0;
   if(blogs.length === 0){
     return(
       <div>You do not have blogs</div>
     )
   }
-  const blogItems = blogs.sort(compare).map((blog)=>{
-    reactId++;
+  const blogItems = blogs.sort(compare).map((blog,i)=>{
     return (
-      <BlogListItem key={reactId} blog={blog}></BlogListItem>
+      <BlogListItem key={i} blog={blog}></BlogListItem>
     )
   });
   return(

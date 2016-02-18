@@ -2,9 +2,10 @@ import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 import {Route, Router, browserHistory } from 'react-router'
 import Layout from './components/layout'
-import Add from './components/add'
 
+import Add from './containers/add'
 import Blogs from './containers/blogs'
+import Edit from './containers/edit'
 
 import _ from 'lodash'
 import { Provider } from 'react-redux';
@@ -23,8 +24,8 @@ class App extends Component{
     return (
       <Router history={browserHistory}>
         <Route path="/" component={Layout}>
-          <Route path="add" component={Add} />
-          <Route path="blogs" component={Blogs} />
+          <Route path="add" component={Add}  />
+          <Route path="edit/:_id" component={Edit} />
           <Route path="*" component={Blogs} />
         </Route>
       </Router>

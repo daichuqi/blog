@@ -3,15 +3,18 @@ import BlogList from '../components/blog_list'
 
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {fetchBlogs} from '../actions/index'
+import {fetchBlogs,clearBlogs} from '../actions/index'
 
 
 class Blogs extends Component{
   constructor(props) {
     super(props);
   }
-  componentDidMount() {
+  componentWillMount() {
     this.props.fetchBlogs();
+  }
+  componentWillUnmount() {
+    // this.props.clearBlogs();
   }
   render() {
     return (
@@ -23,7 +26,7 @@ class Blogs extends Component{
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({fetchBlogs},dispatch);
+  return bindActionCreators({fetchBlogs,clearBlogs},dispatch);
 }
 
 function mapStateToProps(state){
