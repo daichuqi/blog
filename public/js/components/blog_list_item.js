@@ -1,18 +1,18 @@
 import React,{Component} from 'react';
 import { Link } from 'react-router'
 
+var parseTime = function(date){
+  return new Date(Number(date)).toString().slice(0,15);
+}
+
 class BlogListItem extends Component {
   constructor(props){
     super(props);
-    this.onEdit = this.onEdit.bind(this);
     this.state = {
       blog:this.props.blog,
-      date:this.props.blog.date.slice(3,15),
+      date:parseTime(this.props.blog.date),
       section: {__html:this.props.blog.text.split("\n").join('<br />')}
     }
-  }
-  onEdit(){
-    console.log('edit click');
   }
   render() {
     return (

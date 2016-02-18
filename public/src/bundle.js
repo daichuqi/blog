@@ -24787,6 +24787,12 @@
 
 	var _blogs2 = _interopRequireDefault(_blogs);
 
+	var _reactRedux = __webpack_require__(466);
+
+	var _redux = __webpack_require__(472);
+
+	var _index = __webpack_require__(484);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -24805,11 +24811,16 @@
 	  }
 
 	  _createClass(Layout, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.props.fetchBlogs();
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var content = undefined;
 	      if (!this.props.children) {
-	        content = _react2.default.createElement(_blogs2.default, null);
+	        content = _react2.default.createElement(_blogs2.default, { blogs: this.props.blogs });
 	      } else {
 	        content = this.props.children;
 	      }
@@ -24829,7 +24840,14 @@
 	  return Layout;
 	}(_react.Component);
 
-	exports.default = Layout;
+	function mapDispatchToProps(dispatch) {
+	  return (0, _redux.bindActionCreators)({ fetchBlogs: _index.fetchBlogs }, dispatch);
+	}
+
+	function mapStateToProps(state) {
+	  return { blogs: state.blogs };
+	}
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Layout);
 
 /***/ },
 /* 218 */
@@ -42061,7 +42079,7 @@
 	  _createClass(Blogs, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      this.props.fetchBlogs();
+	      // this.props.fetchBlogs();
 	    }
 	  }, {
 	    key: 'componentWillUnmount',
@@ -42071,6 +42089,7 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      console.log(this.props.blogs);
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'container' },
@@ -42082,15 +42101,17 @@
 	  return Blogs;
 	}(_react.Component);
 
-	function mapDispatchToProps(dispatch) {
-	  return (0, _redux.bindActionCreators)({ fetchBlogs: _index.fetchBlogs, clearBlogs: _index.clearBlogs }, dispatch);
-	}
+	// function mapDispatchToProps(dispatch){
+	//   return bindActionCreators({fetchBlogs,clearBlogs},dispatch);
+	// }
 
-	function mapStateToProps(state) {
-	  return { blogs: state.blogs };
-	}
+	// function mapStateToProps(state){
+	//   return {blogs:state.blogs}
+	// }
 
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Blogs);
+	// export default connect(mapStateToProps, mapDispatchToProps)(Blogs);
+
+	exports.default = Blogs;
 
 /***/ },
 /* 464 */
@@ -42120,11 +42141,7 @@
 	  var blogs = _ref.blogs;
 
 	  if (blogs.length === 0) {
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      'You do not have blogs'
-	    );
+	    return _react2.default.createElement('div', null);
 	  }
 	  var blogItems = blogs.sort(compare).map(function (blog, i) {
 	    return _react2.default.createElement(_blog_list_item2.default, { key: i, blog: blog });
@@ -42164,6 +42181,10 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	var parseTime = function parseTime(date) {
+	  return new Date(Number(date)).toString().slice(0, 15);
+	};
+
 	var BlogListItem = function (_Component) {
 	  _inherits(BlogListItem, _Component);
 
@@ -42172,21 +42193,15 @@
 
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BlogListItem).call(this, props));
 
-	    _this.onEdit = _this.onEdit.bind(_this);
 	    _this.state = {
 	      blog: _this.props.blog,
-	      date: _this.props.blog.date.slice(3, 15),
+	      date: parseTime(_this.props.blog.date),
 	      section: { __html: _this.props.blog.text.split("\n").join('<br />') }
 	    };
 	    return _this;
 	  }
 
 	  _createClass(BlogListItem, [{
-	    key: 'onEdit',
-	    value: function onEdit() {
-	      console.log('edit click');
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -43550,8 +43565,9 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.CLEAR_BLOGS = exports.CLEAR_BLOG = exports.FETCH_ONE_BLOG = exports.FETCH_BLOGS = undefined;
+	exports.ADD_BLOG = exports.CLEAR_BLOGS = exports.CLEAR_BLOG = exports.FETCH_ONE_BLOG = exports.FETCH_BLOGS = undefined;
 	exports.fetchBlogs = fetchBlogs;
+	exports.addBlog = addBlog;
 	exports.fetchOneBlog = fetchOneBlog;
 	exports.clearBlog = clearBlog;
 	exports.clearBlogs = clearBlogs;
@@ -43566,12 +43582,20 @@
 	var FETCH_ONE_BLOG = exports.FETCH_ONE_BLOG = 'FETCH_ONE_BLOG';
 	var CLEAR_BLOG = exports.CLEAR_BLOG = 'CLEAR_BLOG';
 	var CLEAR_BLOGS = exports.CLEAR_BLOGS = 'CLEAR_BLOGS';
+	var ADD_BLOG = exports.ADD_BLOG = 'ADD_BLOG';
 
 	function fetchBlogs() {
 	  var data = _axios2.default.post('/getAllBlogs');
 	  return {
 	    type: FETCH_BLOGS,
 	    payload: data
+	  };
+	}
+
+	function addBlog(blog) {
+	  return {
+	    type: ADD_BLOG,
+	    payload: blog
 	  };
 	}
 
@@ -44741,14 +44765,16 @@
 	  _createClass(Add, [{
 	    key: 'handlePost',
 	    value: function handlePost() {
+	      var _this2 = this;
+
 	      var blog = {
 	        title: (0, _reactDom.findDOMNode)(this.refs.title).value,
-	        text: (0, _reactDom.findDOMNode)(this.refs.text).value,
-	        date: new Date()
+	        text: (0, _reactDom.findDOMNode)(this.refs.text).value
 	      };
 	      if (blog.title && blog.text) {
 	        this.props.clearBlogs();
 	        (0, _AppUtils.simplePost)('/postBlog', blog).then(function (response) {
+	          _this2.props.fetchBlogs();
 	          _reactRouter.browserHistory.push('/');
 	        }).catch(function (err) {
 	          console.log('postblog failed: ', err);
@@ -44784,7 +44810,7 @@
 	}(_react.Component);
 
 	function mapDispatchToProps(dispatch) {
-	  return (0, _redux.bindActionCreators)({ clearBlogs: _index.clearBlogs }, dispatch);
+	  return (0, _redux.bindActionCreators)({ clearBlogs: _index.clearBlogs, addBlog: _index.addBlog, fetchBlogs: _index.fetchBlogs }, dispatch);
 	}
 
 	exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(Add);
@@ -45305,6 +45331,8 @@
 	  }, {
 	    key: 'handleUpdate',
 	    value: function handleUpdate() {
+	      var _this2 = this;
+
 	      var blog = {
 	        title: (0, _reactDom.findDOMNode)(this.refs.title).value,
 	        text: (0, _reactDom.findDOMNode)(this.refs.text).value,
@@ -45313,6 +45341,7 @@
 	      if (blog.title && blog.text) {
 	        this.props.clearBlogs();
 	        (0, _AppUtils.simplePost)('/updateBlog', blog).then(function (response) {
+	          _this2.props.fetchBlogs();
 	          _reactRouter.browserHistory.push('/');
 	        }).catch(function (err) {
 	          console.log('postblog failed: ', err);
@@ -45325,6 +45354,7 @@
 	      var id = { id: this.props.params._id };
 	      this.props.clearBlogs();
 	      (0, _AppUtils.simplePost)('/deleteBlog', id);
+	      this.props.fetchBlogs();
 	      _reactRouter.browserHistory.push('/');
 	    }
 	  }, {
@@ -45368,7 +45398,7 @@
 	}(_react.Component);
 
 	function mapDispatchToProps(dispatch) {
-	  return (0, _redux.bindActionCreators)({ fetchOneBlog: _index.fetchOneBlog, clearBlog: _index.clearBlog, clearBlogs: _index.clearBlogs }, dispatch);
+	  return (0, _redux.bindActionCreators)({ fetchOneBlog: _index.fetchOneBlog, clearBlog: _index.clearBlog, clearBlogs: _index.clearBlogs, fetchBlogs: _index.fetchBlogs }, dispatch);
 	}
 
 	function mapStateToProps(state) {
@@ -61149,14 +61179,18 @@
 	  switch (action.type) {
 	    case _index.FETCH_BLOGS:
 	      // return state.concat([action.payload.data]);
-	      return action.payload.data;
+	      return [].concat.apply([], [action.payload.data].concat(_toConsumableArray(state)));
 	    case _index.CLEAR_BLOGS:
 	      return [];
+	    case _index.ADD_BLOG:
+	      return [action.payload].concat(_toConsumableArray(state));
 	  }
 	  return state;
 	};
 
 	var _index = __webpack_require__(484);
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 /***/ },
 /* 517 */
@@ -61174,7 +61208,7 @@
 
 	  switch (action.type) {
 	    case _index.FETCH_ONE_BLOG:
-	      return action.payload.data; // return state.concat([action.payload.data]);
+	      return [].concat.apply([], [action.payload.data].concat(_toConsumableArray(state))); // return state.concat([action.payload.data]);
 	    case _index.CLEAR_BLOG:
 	      return [];
 	  }
@@ -61182,6 +61216,8 @@
 	};
 
 	var _index = __webpack_require__(484);
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 /***/ }
 /******/ ]);

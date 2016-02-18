@@ -14,7 +14,7 @@ function compare(a,b) {
 const BlogList = ({blogs}) => {
   if(blogs.length === 0){
     return(
-      <div>You do not have blogs</div>
+      <div></div>
     )
   }
   const blogItems = blogs.sort(compare).map((blog,i)=>{

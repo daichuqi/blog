@@ -48,7 +48,7 @@ server.post('/getOneBlog', function(req,res,next){
 server.post('/postBlog', function(req,res,next){
   var blogDB = new BlogDB();
   blogDB.title = req.body.title;
-  blogDB.date = moment();
+  blogDB.date = Date.now();
   blogDB.text = req.body.text;
   blogDB.save(function(err){
     if(err){

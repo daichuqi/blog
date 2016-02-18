@@ -2,7 +2,7 @@ import React,{Component} from 'react'
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {findDOMNode} from 'react-dom'
-import {fetchOneBlog,clearBlog,clearBlogs} from '../actions/index'
+import {fetchOneBlog,clearBlog,clearBlogs,fetchBlogs} from '../actions/index'
 import {Button} from 'react-bootstrap'
 import {simplePost} from '../utils/AppUtils'
 import { browserHistory } from 'react-router'
@@ -28,6 +28,7 @@ class Edit extends Component {
     if(blog.title && blog.text){
       this.props.clearBlogs();
       simplePost('/updateBlog', blog).then((response) => {
+        this.props.fetchBlogs();
         browserHistory.push('/');
       }).catch((err) => {
         console.log('postblog failed: ', err);
@@ -38,6 +39,7 @@ class Edit extends Component {
     let id = {id:this.props.params._id}
     this.props.clearBlogs();
     simplePost('/deleteBlog', id);
+    this.props.fetchBlogs();
     browserHistory.push('/');
   }
   render(){
@@ -65,7 +67,7 @@ class Edit extends Component {
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({fetchOneBlog,clearBlog,clearBlogs},dispatch);
+  return bindActionCreators({fetchOneBlog,clearBlog,clearBlogs,fetchBlogs},dispatch);
 }
 
 function mapStateToProps(state){

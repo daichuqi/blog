@@ -6,7 +6,7 @@ import {browserHistory} from 'react-router'
 
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {clearBlogs} from '../actions/index'
+import {clearBlogs,addBlog,fetchBlogs} from '../actions/index'
 
 
 class Add extends Component {
@@ -18,11 +18,11 @@ class Add extends Component {
     var blog = {
       title:findDOMNode(this.refs.title).value,
       text:findDOMNode(this.refs.text).value,
-      date:new Date
     }
     if(blog.title && blog.text){
       this.props.clearBlogs();
       simplePost('/postBlog', blog).then((response) => {
+        this.props.fetchBlogs()
         browserHistory.push('/');
       }).catch((err) => {
         console.log('postblog failed: ', err);
@@ -43,7 +43,7 @@ class Add extends Component {
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({clearBlogs},dispatch);
+  return bindActionCreators({clearBlogs,addBlog,fetchBlogs},dispatch);
 }
 
 export default connect(null, mapDispatchToProps)(Add);
