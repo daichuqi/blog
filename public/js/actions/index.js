@@ -5,6 +5,16 @@ export const FETCH_ONE_BLOG = 'FETCH_ONE_BLOG';
 export const CLEAR_BLOG = 'CLEAR_BLOG';
 export const CLEAR_BLOGS = 'CLEAR_BLOGS';
 export const ADD_BLOG = 'ADD_BLOG';
+export const DELETE_BLOG = 'DELETE_BLOG';
+export const SELECT_BLOG = 'SELECT_BLOG';
+
+
+export function selectBlog(blog){
+  return{
+    type:SELECT_BLOG,
+    payload:blog
+  }
+}
 
 export function fetchBlogs(){
   const data = axios.post('/getAllBlogs')
@@ -42,3 +52,11 @@ export function clearBlogs(){
     type:CLEAR_BLOGS,
   };
 }
+
+export function deleteBlog(id){
+  return{
+    type:DELETE_BLOG,
+    payload:id,
+  };
+}
+

@@ -1,4 +1,5 @@
-import {FETCH_BLOGS,CLEAR_BLOGS,ADD_BLOG} from '../actions/index'
+import {FETCH_BLOGS,CLEAR_BLOGS,ADD_BLOG,DELETE_BLOG} from '../actions/index'
+
 
 export default function(state=[],action){
   switch(action.type){
@@ -9,6 +10,10 @@ export default function(state=[],action){
       return []
     case ADD_BLOG:
       return [action.payload,...state]
+    case DELETE_BLOG:
+      return [...state].filter(function (blog) {
+        return blog._id !== action.payload.id;
+      });
   }
   return state;
 }

@@ -2,7 +2,7 @@ import React,{Component} from 'react'
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {findDOMNode} from 'react-dom'
-import {fetchOneBlog,clearBlog,clearBlogs,fetchBlogs} from '../actions/index'
+import {fetchOneBlog,clearBlog,clearBlogs,fetchBlogs,deleteBlog} from '../actions/index'
 import {Button} from 'react-bootstrap'
 import {simplePost} from '../utils/AppUtils'
 import { browserHistory } from 'react-router'
@@ -12,12 +12,18 @@ class Edit extends Component {
     super(props);
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.onTitleInputChange = this.onTitleInputChange.bind(this);
+    this.onTextInputChange = this.onTextInputChange.bind(this);
+    this.state = {
+      title:this.props.blog.title,
+      text:this.props.blog.text
+    }
   }
-  componentWillMount() {
-    this.props.fetchOneBlog(this.props.params._id);
+  onTitleInputChange(event){
+    this.setState({title:event.target.value});
   }
-  componentWillUnmount() {
-    this.props.clearBlog();
+  onTextInputChange(event){
+    this.setState({text:event.target.value});
   }
   handleUpdate(){
     let blog = {
@@ -28,7 +34,7 @@ class Edit extends Component {
     if(blog.title && blog.text){
       this.props.clearBlogs();
       simplePost('/updateBlog', blog).then((response) => {
-        this.props.fetchBlogs();
+      this.props.fetchBlogs();
         browserHistory.push('/');
       }).catch((err) => {
         console.log('postblog failed: ', err);
@@ -37,9 +43,8 @@ class Edit extends Component {
   }
   handleDelete(){
     let id = {id:this.props.params._id}
-    this.props.clearBlogs();
+    this.props.deleteBlog(id);
     simplePost('/deleteBlog', id);
-    this.props.fetchBlogs();
     browserHistory.push('/');
   }
   render(){
@@ -47,15 +52,15 @@ class Edit extends Component {
       <div className="container">
         <div className="titleInputBox">
           <input
-            onChange={function() {}}
+            onChange={this.onTitleInputChange}
             size="61" max="60" type="text" ref="title"
-            defaultValue={this.props.blog.title || ''}
+            value={this.state.title}
           />
         </div>
         <textarea
-          onChange={function() {}}
+          onChange={this.onTextInputChange}
           ref="text" className="textInputBox" rows="12" cols="90"
-          defaultValue={this.props.blog.text || ''}>
+          value={this.state.text}>
         </textarea>
         <div>
           <Button onClick={this.handleUpdate} bsStyle="primary">UPDATE</Button>
@@ -67,7 +72,7 @@ class Edit extends Component {
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({fetchOneBlog,clearBlog,clearBlogs,fetchBlogs},dispatch);
+  return bindActionCreators({fetchOneBlog,clearBlog,clearBlogs,fetchBlogs,deleteBlog},dispatch);
 }
 
 function mapStateToProps(state){

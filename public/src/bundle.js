@@ -42077,19 +42077,9 @@
 	  }
 
 	  _createClass(Blogs, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      // this.props.fetchBlogs();
-	    }
-	  }, {
-	    key: 'componentWillUnmount',
-	    value: function componentWillUnmount() {
-	      // this.props.clearBlogs();
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
-	      console.log(this.props.blogs);
+	      // console.log(this.props.blogs);
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'container' },
@@ -42104,11 +42094,9 @@
 	// function mapDispatchToProps(dispatch){
 	//   return bindActionCreators({fetchBlogs,clearBlogs},dispatch);
 	// }
-
 	// function mapStateToProps(state){
 	//   return {blogs:state.blogs}
 	// }
-
 	// export default connect(mapStateToProps, mapDispatchToProps)(Blogs);
 
 	exports.default = Blogs;
@@ -42173,6 +42161,12 @@
 
 	var _reactRouter = __webpack_require__(160);
 
+	var _reactRedux = __webpack_require__(466);
+
+	var _redux = __webpack_require__(472);
+
+	var _index = __webpack_require__(484);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -42204,6 +42198,8 @@
 	  _createClass(BlogListItem, [{
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+
 	      return _react2.default.createElement(
 	        'li',
 	        { className: 'blog_item' },
@@ -42219,9 +42215,15 @@
 	        ),
 	        _react2.default.createElement('div', { dangerouslySetInnerHTML: this.state.section, className: 'blog_section' }),
 	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/edit/' + this.state.blog._id },
-	          'Edit'
+	          'div',
+	          { onClick: function onClick() {
+	              return _this2.props.selectBlog(_this2.props.blog);
+	            } },
+	          _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/edit/' + this.state.blog._id },
+	            'Edit'
+	          )
 	        )
 	      );
 	    }
@@ -42230,7 +42232,11 @@
 	  return BlogListItem;
 	}(_react.Component);
 
-	exports.default = BlogListItem;
+	function mapDispatchToProps(dispatch) {
+	  return (0, _redux.bindActionCreators)({ selectBlog: _index.selectBlog }, dispatch);
+	}
+
+	exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(BlogListItem);
 
 /***/ },
 /* 466 */
@@ -43565,12 +43571,14 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.ADD_BLOG = exports.CLEAR_BLOGS = exports.CLEAR_BLOG = exports.FETCH_ONE_BLOG = exports.FETCH_BLOGS = undefined;
+	exports.SELECT_BLOG = exports.DELETE_BLOG = exports.ADD_BLOG = exports.CLEAR_BLOGS = exports.CLEAR_BLOG = exports.FETCH_ONE_BLOG = exports.FETCH_BLOGS = undefined;
+	exports.selectBlog = selectBlog;
 	exports.fetchBlogs = fetchBlogs;
 	exports.addBlog = addBlog;
 	exports.fetchOneBlog = fetchOneBlog;
 	exports.clearBlog = clearBlog;
 	exports.clearBlogs = clearBlogs;
+	exports.deleteBlog = deleteBlog;
 
 	var _axios = __webpack_require__(485);
 
@@ -43583,6 +43591,15 @@
 	var CLEAR_BLOG = exports.CLEAR_BLOG = 'CLEAR_BLOG';
 	var CLEAR_BLOGS = exports.CLEAR_BLOGS = 'CLEAR_BLOGS';
 	var ADD_BLOG = exports.ADD_BLOG = 'ADD_BLOG';
+	var DELETE_BLOG = exports.DELETE_BLOG = 'DELETE_BLOG';
+	var SELECT_BLOG = exports.SELECT_BLOG = 'SELECT_BLOG';
+
+	function selectBlog(blog) {
+	  return {
+	    type: SELECT_BLOG,
+	    payload: blog
+	  };
+	}
 
 	function fetchBlogs() {
 	  var data = _axios2.default.post('/getAllBlogs');
@@ -43618,6 +43635,13 @@
 	function clearBlogs() {
 	  return {
 	    type: CLEAR_BLOGS
+	  };
+	}
+
+	function deleteBlog(id) {
+	  return {
+	    type: DELETE_BLOG,
+	    payload: id
 	  };
 	}
 
@@ -45315,18 +45339,24 @@
 
 	    _this.handleUpdate = _this.handleUpdate.bind(_this);
 	    _this.handleDelete = _this.handleDelete.bind(_this);
+	    _this.onTitleInputChange = _this.onTitleInputChange.bind(_this);
+	    _this.onTextInputChange = _this.onTextInputChange.bind(_this);
+	    _this.state = {
+	      title: _this.props.blog.title,
+	      text: _this.props.blog.text
+	    };
 	    return _this;
 	  }
 
 	  _createClass(Edit, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      this.props.fetchOneBlog(this.props.params._id);
+	    key: 'onTitleInputChange',
+	    value: function onTitleInputChange(event) {
+	      this.setState({ title: event.target.value });
 	    }
 	  }, {
-	    key: 'componentWillUnmount',
-	    value: function componentWillUnmount() {
-	      this.props.clearBlog();
+	    key: 'onTextInputChange',
+	    value: function onTextInputChange(event) {
+	      this.setState({ text: event.target.value });
 	    }
 	  }, {
 	    key: 'handleUpdate',
@@ -45352,9 +45382,8 @@
 	    key: 'handleDelete',
 	    value: function handleDelete() {
 	      var id = { id: this.props.params._id };
-	      this.props.clearBlogs();
+	      this.props.deleteBlog(id);
 	      (0, _AppUtils.simplePost)('/deleteBlog', id);
-	      this.props.fetchBlogs();
 	      _reactRouter.browserHistory.push('/');
 	    }
 	  }, {
@@ -45367,15 +45396,15 @@
 	          'div',
 	          { className: 'titleInputBox' },
 	          _react2.default.createElement('input', {
-	            onChange: function onChange() {},
+	            onChange: this.onTitleInputChange,
 	            size: '61', max: '60', type: 'text', ref: 'title',
-	            defaultValue: this.props.blog.title || ''
+	            value: this.state.title
 	          })
 	        ),
 	        _react2.default.createElement('textarea', {
-	          onChange: function onChange() {},
+	          onChange: this.onTextInputChange,
 	          ref: 'text', className: 'textInputBox', rows: '12', cols: '90',
-	          defaultValue: this.props.blog.text || '' }),
+	          value: this.state.text }),
 	        _react2.default.createElement(
 	          'div',
 	          null,
@@ -45398,7 +45427,7 @@
 	}(_react.Component);
 
 	function mapDispatchToProps(dispatch) {
-	  return (0, _redux.bindActionCreators)({ fetchOneBlog: _index.fetchOneBlog, clearBlog: _index.clearBlog, clearBlogs: _index.clearBlogs, fetchBlogs: _index.fetchBlogs }, dispatch);
+	  return (0, _redux.bindActionCreators)({ fetchOneBlog: _index.fetchOneBlog, clearBlog: _index.clearBlog, clearBlogs: _index.clearBlogs, fetchBlogs: _index.fetchBlogs, deleteBlog: _index.deleteBlog }, dispatch);
 	}
 
 	function mapStateToProps(state) {
@@ -61184,6 +61213,10 @@
 	      return [];
 	    case _index.ADD_BLOG:
 	      return [action.payload].concat(_toConsumableArray(state));
+	    case _index.DELETE_BLOG:
+	      return [].concat(_toConsumableArray(state)).filter(function (blog) {
+	        return blog._id !== action.payload.id;
+	      });
 	  }
 	  return state;
 	};
@@ -61203,21 +61236,21 @@
 	});
 
 	exports.default = function () {
-	  var state = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
 	  var action = arguments[1];
 
 	  switch (action.type) {
 	    case _index.FETCH_ONE_BLOG:
-	      return [].concat.apply([], [action.payload.data].concat(_toConsumableArray(state))); // return state.concat([action.payload.data]);
+	      return action.payload.data; // return state.concat([action.payload.data]);
 	    case _index.CLEAR_BLOG:
-	      return [];
+	      return null;
+	    case _index.SELECT_BLOG:
+	      return action.payload;
 	  }
 	  return state;
 	};
 
 	var _index = __webpack_require__(484);
-
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 /***/ }
 /******/ ]);

@@ -10,14 +10,8 @@ class Blogs extends Component{
   constructor(props) {
     super(props);
   }
-  componentWillMount() {
-    // this.props.fetchBlogs();
-  }
-  componentWillUnmount() {
-    // this.props.clearBlogs();
-  }
   render() {
-    console.log(this.props.blogs);
+    // console.log(this.props.blogs);
     return (
       <div className="container">
         <BlogList blogs={this.props.blogs} />
@@ -29,11 +23,9 @@ class Blogs extends Component{
 // function mapDispatchToProps(dispatch){
 //   return bindActionCreators({fetchBlogs,clearBlogs},dispatch);
 // }
-
 // function mapStateToProps(state){
 //   return {blogs:state.blogs}
 // }
-
 // export default connect(mapStateToProps, mapDispatchToProps)(Blogs);
 
 

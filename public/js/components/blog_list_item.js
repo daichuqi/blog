@@ -1,6 +1,11 @@
 import React,{Component} from 'react';
 import { Link } from 'react-router'
 
+
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {selectBlog} from '../actions/index'
+
 var parseTime = function(date){
   return new Date(Number(date)).toString().slice(0,15);
 }
@@ -21,11 +26,19 @@ class BlogListItem extends Component {
           <span className="blog_date">{this.state.date}</span>
         </div>
         <div dangerouslySetInnerHTML={ this.state.section } className="blog_section" />
-        <Link to={`/edit/${this.state.blog._id}`}>Edit</Link>
+        <div onClick={()=>this.props.selectBlog(this.props.blog)}>
+          <Link to={`/edit/${this.state.blog._id}`}>Edit</Link>
+        </div>
+
     </li>
     )
   }
 }
 
 
-export default BlogListItem;
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({selectBlog},dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(BlogListItem);
+
