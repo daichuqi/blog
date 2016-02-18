@@ -24,6 +24,25 @@ export const postJSON = function(url, body) {
       });
     });
   }
+
 export const getJSON = function(url){
-  return window.fetch(url);
+  return new Promise(function(resolve, reject) {
+    window.fetch(url, {
+        method: 'get',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      })
+      .then((response) => {
+        response.json()
+        .then(function(json) {
+          resolve(json);
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        reject(err);
+      });
+    });
 }

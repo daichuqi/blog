@@ -2,6 +2,7 @@ import React,{Component} from 'react'
 import {Button} from 'react-bootstrap'
 import {findDOMNode} from 'react-dom'
 import {postJSON} from '../utils/AppUtils'
+import { browserHistory } from 'react-router'
 
 class Add extends Component {
   constructor(props){
@@ -16,16 +17,16 @@ class Add extends Component {
     }
     if(blog.title && blog.text){
       postJSON('/postblog', blog);
+      browserHistory.push('/blogs');
     }
-
   }
   render(){
     return (
       <div className="container">
         <div className="titleInputBox">
-          <input size="51" max="50" type="text" ref="title" />
+          <input size="61" max="60" type="text" ref="title" />
         </div>
-        <textarea ref="text" className="textInputBox" rows="8" cols="60"></textarea>
+        <textarea ref="text" className="textInputBox" rows="12" cols="90"></textarea>
         <div><Button onClick={this.handlePost} bsStyle="primary">POST</Button></div>
       </div>
       )

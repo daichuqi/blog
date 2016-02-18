@@ -18,7 +18,7 @@ class TobNavbar extends React.Component {
         <Navbar.Collapse>
           <Nav>
             <li eventKey={1}><Link to="/add">Add</Link></li>
-            <li eventKey={2}><Link to="/blogs">Bolgs</Link></li>
+            <li eventKey={2}><Link to="/blogs">Blogs</Link></li>
             <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
               <li eventKey={3.1}><Link to="/add">Add</Link></li>
               <li eventKey={3.2}><Link to="/blogs">Blogs</Link></li>

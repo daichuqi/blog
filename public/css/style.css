@@ -1,3 +1,6 @@
+element.style {
+    color: #5c5c5c;
+}
 ul
 {
   list-style-type: none;
@@ -6,12 +9,24 @@ ul
 textarea {
    resize: none;
 }
+.blog_section{
+  color: #5c5c5c;
+  font-size: 9pt;
+  color: #101010;
+  font-family: Verdana,Helvetica,Arial;
+}
 
 .blog_item{
   margin:20px 50px 50px 20px;
+  width: 600px;
 }
 .blog_title{
   font-weight: bold;
+}
+
+.blog_date{
+    font-size: 10px;
+    color: #902400;
 }
 
 

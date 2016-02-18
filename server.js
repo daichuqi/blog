@@ -24,6 +24,16 @@ mongoose.connect(secret.database,function(err){
   }
 });
 
+server.post('/getAllBlogs', function(req,res,next){
+    BlogDB.find(function(err,allblogs){
+    if(allblogs){
+      res.json(allblogs);
+    }else{
+      return next(err);
+    }
+  });
+})
+
 server.post('/postblog', function(req,res,next){
   var blogDB = new BlogDB();
   blogDB.title = req.body.title;
