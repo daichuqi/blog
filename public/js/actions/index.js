@@ -7,7 +7,15 @@ export const CLEAR_BLOGS = 'CLEAR_BLOGS';
 export const ADD_BLOG = 'ADD_BLOG';
 export const DELETE_BLOG = 'DELETE_BLOG';
 export const SELECT_BLOG = 'SELECT_BLOG';
+export const UPDATE_BLOG = 'UPDATE_BLOG';
 
+
+export function updateBlog(blog){
+  return{
+    type:UPDATE_BLOG,
+    payload:blog
+  }
+}
 
 export function selectBlog(blog){
   return{

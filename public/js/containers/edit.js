@@ -2,7 +2,7 @@ import React,{Component} from 'react'
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {findDOMNode} from 'react-dom'
-import {fetchOneBlog,clearBlog,clearBlogs,fetchBlogs,deleteBlog} from '../actions/index'
+import {updateBlog,deleteBlog} from '../actions/index'
 import {Button} from 'react-bootstrap'
 import {simplePost} from '../utils/AppUtils'
 import { browserHistory } from 'react-router'
@@ -32,9 +32,8 @@ class Edit extends Component {
       id:this.props.params._id
     }
     if(blog.title && blog.text){
-      this.props.clearBlogs();
+      this.props.updateBlog(blog);
       simplePost('/updateBlog', blog).then((response) => {
-      this.props.fetchBlogs();
         browserHistory.push('/');
       }).catch((err) => {
         console.log('postblog failed: ', err);
@@ -72,7 +71,7 @@ class Edit extends Component {
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({fetchOneBlog,clearBlog,clearBlogs,fetchBlogs,deleteBlog},dispatch);
+  return bindActionCreators({updateBlog,deleteBlog},dispatch);
 }
 
 function mapStateToProps(state){

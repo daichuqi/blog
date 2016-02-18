@@ -43571,7 +43571,8 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.SELECT_BLOG = exports.DELETE_BLOG = exports.ADD_BLOG = exports.CLEAR_BLOGS = exports.CLEAR_BLOG = exports.FETCH_ONE_BLOG = exports.FETCH_BLOGS = undefined;
+	exports.UPDATE_BLOG = exports.SELECT_BLOG = exports.DELETE_BLOG = exports.ADD_BLOG = exports.CLEAR_BLOGS = exports.CLEAR_BLOG = exports.FETCH_ONE_BLOG = exports.FETCH_BLOGS = undefined;
+	exports.updateBlog = updateBlog;
 	exports.selectBlog = selectBlog;
 	exports.fetchBlogs = fetchBlogs;
 	exports.addBlog = addBlog;
@@ -43593,6 +43594,14 @@
 	var ADD_BLOG = exports.ADD_BLOG = 'ADD_BLOG';
 	var DELETE_BLOG = exports.DELETE_BLOG = 'DELETE_BLOG';
 	var SELECT_BLOG = exports.SELECT_BLOG = 'SELECT_BLOG';
+	var UPDATE_BLOG = exports.UPDATE_BLOG = 'UPDATE_BLOG';
+
+	function updateBlog(blog) {
+	  return {
+	    type: UPDATE_BLOG,
+	    payload: blog
+	  };
+	}
 
 	function selectBlog(blog) {
 	  return {
@@ -45361,17 +45370,14 @@
 	  }, {
 	    key: 'handleUpdate',
 	    value: function handleUpdate() {
-	      var _this2 = this;
-
 	      var blog = {
 	        title: (0, _reactDom.findDOMNode)(this.refs.title).value,
 	        text: (0, _reactDom.findDOMNode)(this.refs.text).value,
 	        id: this.props.params._id
 	      };
 	      if (blog.title && blog.text) {
-	        this.props.clearBlogs();
+	        this.props.updateBlog(blog);
 	        (0, _AppUtils.simplePost)('/updateBlog', blog).then(function (response) {
-	          _this2.props.fetchBlogs();
 	          _reactRouter.browserHistory.push('/');
 	        }).catch(function (err) {
 	          console.log('postblog failed: ', err);
@@ -45427,7 +45433,7 @@
 	}(_react.Component);
 
 	function mapDispatchToProps(dispatch) {
-	  return (0, _redux.bindActionCreators)({ fetchOneBlog: _index.fetchOneBlog, clearBlog: _index.clearBlog, clearBlogs: _index.clearBlogs, fetchBlogs: _index.fetchBlogs, deleteBlog: _index.deleteBlog }, dispatch);
+	  return (0, _redux.bindActionCreators)({ updateBlog: _index.updateBlog, deleteBlog: _index.deleteBlog }, dispatch);
 	}
 
 	function mapStateToProps(state) {
@@ -61216,6 +61222,15 @@
 	    case _index.DELETE_BLOG:
 	      return [].concat(_toConsumableArray(state)).filter(function (blog) {
 	        return blog._id !== action.payload.id;
+	      });
+	    case _index.UPDATE_BLOG:
+	      return [].concat(_toConsumableArray(state)).map(function (blog, i) {
+	        if (blog._id === action.payload.id) {
+	          blog.title = action.payload.title;
+	          blog.text = action.payload.text;
+	          return blog;
+	        }
+	        return blog;
 	      });
 	  }
 	  return state;
