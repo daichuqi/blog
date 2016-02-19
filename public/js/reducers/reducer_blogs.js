@@ -4,7 +4,6 @@ const ActionType = Constants.ActionTypes;
 export default function(state=[],action){
   switch(action.type){
     case ActionType.FETCH_BLOGS:
-      // return state.concat([action.payload.data]);
       return [].concat.apply([], [action.payload.data,...state])
     case ActionType.CLEAR_BLOGS:
       return []

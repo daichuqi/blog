@@ -1,14 +1,16 @@
 import React,{Component} from 'react'
 import BlogList from '../components/blog_list'
 
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {fetchBlogs,clearBlogs} from '../actions/index'
+
+// import {connect} from 'react-redux';
+// import {bindActionCreators} from 'redux';
+// import {fetchBlogs,clearBlogs} from '../actions/index'
 
 
 class Blogs extends Component{
   constructor(props) {
     super(props);
+    this.state = {}
   }
   render() {
     // console.log(this.props.blogs);

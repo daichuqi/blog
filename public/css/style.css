@@ -9,6 +9,31 @@ ul
 textarea {
    resize: none;
 }
+
+a:link {
+    text-decoration: none;
+}
+
+.fullwidth{
+  width: 100%;
+}
+.paddingZero{
+  padding: 0;
+}
+
+.prevPager{
+  float: left;
+  padding:20px;
+  font-size: 9px
+}
+
+.nextPager{
+  float: right;
+  padding:20px;
+  margin-right: 30px;
+  font-size: 9px;
+}
+
 .blog_section{
   color: #5c5c5c;
   font-size: 9pt;
@@ -17,7 +42,7 @@ textarea {
 }
 
 .blog_item{
-  margin:20px 50px 50px 20px;
+  margin:20px 20px 50px 20px;
 }
 .blog_title{
   font-weight: bold;

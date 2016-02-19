@@ -2,6 +2,14 @@ import axios from 'axios';
 import Constants from './constants'
 const ActionType = Constants.ActionTypes;
 
+
+export function selectPage(page){
+  return{
+    type:ActionType.SELECT_PAGE,
+    payload:page
+  }
+}
+
 export function updateBlog(blog){
   return{
     type:ActionType.UPDATE_BLOG,

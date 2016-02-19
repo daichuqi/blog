@@ -1,7 +1,7 @@
 import React from 'react';
 import BlogListItem from './blog_list_item';
 import {compareTimeMs} from '../utils/AppUtils'
-
+import PageBar from '../containers/pagination'
 
 const BlogList = ({blogs}) => {
   if(blogs.length === 0){
@@ -15,9 +15,12 @@ const BlogList = ({blogs}) => {
     )
   });
   return(
-    <ul className="col-lg-8 col-md-10 list-group">
-      {blogItems}
-    </ul>
+    <div className="col-lg-7 col-md-10 paddingZero">
+      <ul className="list-group">
+        {blogItems}
+      </ul>
+      <PageBar />
+    </div>
   );
 };
 
